@@ -5,29 +5,10 @@ import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-function HomeScreen() {
-	return (
-		<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-			<Text>Home Screen</Text>
-		</View>
-	);
-}
-
-function SettingsScreen() {
-	return (
-		<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-			<Text>Settings!</Text>
-		</View>
-	);
-}
-
-function ShareScreen() {
-	return (
-		<View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-			<Text>Share Screen!</Text>
-		</View>
-	);
-}
+// Screens
+import Home from './src/screens/HomeScreen'
+import Settings from './src/screens/SettingsScreen';
+import Share from './src/screens/ShareScreen';
 
 const Tab = createBottomTabNavigator();
 const TabNavigator = Tab.Navigator;
@@ -42,13 +23,13 @@ export default function App() {
 						let iconName;
 
 						switch (route.name) {
-							case 'Home':
+							case 'Call':
 								iconName = 'call';
 								break;
 							case 'Settings':
 								iconName = 'settings';
 								break;
-							case 'ScreenShare':
+							case 'Share':
 								iconName = 'share-outline';
 								break;
 							default:
@@ -59,13 +40,13 @@ export default function App() {
 					}
 				})}
 				tabBarOptions={{
-					activeTintColor: 'tomato',
+					activeTintColor: 'red',
 					inactiveTintColor: 'gray'
 				}}
 			>
-				<TabScreen name="Home" component={HomeScreen} />
-				<TabScreen name="ScreenShare" component={ShareScreen} />
-				<TabScreen name="Settings" component={SettingsScreen} />
+				<TabScreen name="Call" component={Home} />
+				<TabScreen name="Share" component={Share} />
+				<TabScreen name="Settings" component={Settings} />
 			</TabNavigator>
 		</NavigationContainer>
 	);
