@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Dimensions, Text, View, StyleSheet, TextInput } from 'react-native';
 import { Card, Button } from 'react-native-elements';
 import { styles } from '../styles';
@@ -6,6 +6,16 @@ import { styles } from '../styles';
 const { screenStyles } = styles;
 
 export default function Share() {
+	const [ remoteConnectionId, setRemoteConnectionId ] = useState('');
+
+	const onRemoteConnectionIdChange = (value) => {
+		// TODO: this needs to be fixed. It does not work
+		if (value.length == 3 || value.length == 7){
+			value += "-"
+		}
+		setRemoteConnectionId(value);
+		// enable connect button
+	};
 	return (
 		<View style={screenStyles.container}>
 			<Card containerStyle={screenStyles.card}>
@@ -17,11 +27,15 @@ export default function Share() {
 			<Card>
 				<Text>Connect to remote host</Text>
 				<TextInput
+					onChangeText={(text) => onRemoteConnectionIdChange(text)}
 					style={screenStyles.textInput}
+					keyboardType="decimal-pad"
 					placeholder="Enter remote Connection ID"
 					placeholderTextColor="#004646"
-					textContentType="username"
-					returnKeyType="next"
+					textContentType="telephoneNumber"
+					maxLength={12}
+					value={remoteConnectionId}
+					returnKeyType="done"
 				/>
 				<Button title="Connect" />
 			</Card>
